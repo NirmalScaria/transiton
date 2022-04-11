@@ -1,30 +1,11 @@
 asgiref==3.5.0
-brotlipy @ file:///Users/runner/miniforge3/conda-bld/brotlipy_1636012319596/work
 certifi==2021.10.8
-cffi @ file:///Users/runner/miniforge3/conda-bld/cffi_1636046173594/work
-charset-normalizer @ file:///home/conda/feedstock_root/build_artifacts/charset-normalizer_1644853463426/work
-colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1602866480661/work
 conda==4.11.0
-conda-package-handling @ file:///Users/runner/miniforge3/conda-bld/conda-package-handling_1636022092101/work
-cryptography @ file:///Users/runner/miniforge3/conda-bld/cryptography_1639699578867/work
 dj-database-url==0.5.0
 Django==4.0.4
 django-heroku==0.3.1
 gunicorn==20.1.0
-idna @ file:///home/conda/feedstock_root/build_artifacts/idna_1642433548627/work
-numpy @ file:///Users/runner/miniforge3/conda-bld/numpy_1649059977221/work
 pandas==1.4.2
 psycopg2==2.9.3
-pycosat @ file:///Users/runner/miniforge3/conda-bld/pycosat_1636020570107/work
-pycparser @ file:///home/conda/feedstock_root/build_artifacts/pycparser_1636257122734/work
-pyOpenSSL @ file:///home/conda/feedstock_root/build_artifacts/pyopenssl_1643496850550/work
-PySocks @ file:///Users/runner/miniforge3/conda-bld/pysocks_1635862736740/work
-python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1626286286081/work
-pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1647961439546/work
-requests @ file:///home/conda/feedstock_root/build_artifacts/requests_1641580202195/work
-ruamel-yaml-conda @ file:///Users/runner/miniforge3/conda-bld/ruamel_yaml_1636009262461/work
-six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
 sqlparse==0.4.2
-tqdm @ file:///home/conda/feedstock_root/build_artifacts/tqdm_1632160078689/work
-urllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1641584929973/work
 whitenoise==6.0.0
