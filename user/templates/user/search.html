@@ -1,0 +1,592 @@
+{% extends "user/base.html" %}
+{% load static %}
+
+{% block maincontent %}
+<div style="height:210px; position:fixed; width: 100%; background-color:#F1F6F9; z-index:10;"></div>
+<div style="height:210; position:relative; width: 0%; "></div>
+
+<nav class="navbar navbar-expand-md navbar-expand-lg mysecondnavbar" style = "position:fixed; top:76px; z-index:13;">
+    <div class="container-fluid" style = "margin-top:0px;">
+
+
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link mysecondnavitem" href="#"
+                        style="margin-left:38px;  margin-top:1px;">{{originname}}</a>
+
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mysecondnavitem text-nowrap" href="#" style=" margin-top:3px;">
+                        <span class="material-icons" style="font-size:20!important;">&#xe5c8;</span>
+
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mysecondnavitem text-nowrap" href="#" style=" margin-top:1px;">{{destname}}</a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mysecondnavitem text-nowrap" href="#" style=" margin-top:1px;">AT
+
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mysecondnavitem text-nowrap" href="#"
+                        style="margin-right:30px;  margin-top:1px;">
+                        {{searchtime}}
+
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mysecondnavitem text-nowrap" href="#">
+                        <span class="material-icons" style="font-size:25!important;">&#xe5e0;</span>
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link mysecondnavitem text-nowrap " href="#"
+                        style="margin-left:-17px; margin-right:-10px; margin-top:1px;">
+                        {{searchdate}}
+
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mysecondnavitem text-nowrap" href="#">
+                        <span class="material-icons" style="font-size:25!important;">&#xe5e1;</span>
+
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mysecondnavitem text-nowrap " href="#"
+                        style="margin-left:17px; margin-top:1px; text-decoration:underline;">
+                        MODIFY SEARCH
+
+                    </a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="mythirdnav d-flex flex-row" style = "position:fixed; top:125px; z-index:12; ">
+    <div class="p-2" >
+        <span style="font-family: 'Roboto', sans-serif; font-size: 13; font-weight:500; color: #535353;">Sorted
+            by</span>
+        &nbsp
+        <span
+            style="font-family: 'Roboto', sans-serif; font-size: 15; font-weight:500; color: #3C3C3C;">Relevance</span>
+        <span class="material-icons align-middle"
+            style="font-size: 19; font-weight:500; color: #3C3C3C; margin-left:-3px;">&#xe5cf;</span>
+
+
+    </div>
+
+    <div class="p-2">
+        <div
+            style=" border-left-color: #9D9D9D; border-left-width: 1px; border-left-style: solid; padding-top:3px; padding-bottom:4px; padding-left:8px;">
+            <span
+                style="font-family: 'Roboto', sans-serif; font-size: 14; font-weight:500; color: #535353; padding-left:13px;">{{nbusesfound}}
+                Routes found</span>
+
+
+        </div>
+
+    </div>
+</div>
+<hr style="position:fixed; top:152;  width:98%; margin-left:1%; margin-right:1%; z-index:11; " color="#9D9D9D">
+<!-- HEADING COMPLETED -->
+
+<div class="container-fluid myresultmain">
+    <div class="row">
+        <!-- FILTER SIDEBAR START -->
+        <div class="col-3 col-xl-3 d-none d-lg-block container-fluid mycategories" style="position:fixed; padding-left: 65px;">
+            <div class="row">
+                <div class="col-12 myfilterhead">
+                    BUS CATEGORY
+                </div>
+            </div>
+            <!-- CATEGoriES LIST -->
+            {% for category in buscategories %}
+            <div class="row">
+                <div class="col-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" rel = "{{category.code}}" value="" id="flexCheckChecked" onchange="change();">
+                        <label class="form-check-label myfilterlabel" for="flexCheckChecked">
+                            {{ category.category }}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-2 myfilterlabel">
+                    ({{category.count}})
+                </div>
+            </div>
+            {% endfor %}
+            <!-- CATEGORIES END -->
+            <div class="row">
+                <div class="col-12 myfilterhead">
+                    BUS TYPE
+                </div>
+            </div>
+            {% for type in bustypes %}
+            <div class="row">
+                <div class="col-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                        <label class="form-check-label myfilterlabel" for="flexCheckChecked">
+                            {{type.type}}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-2 myfilterlabel">
+                    ({{type.count}})
+                </div>
+            </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col-12 myfilterhead">
+                    ROUTE OPTIONS
+                </div>
+            </div>
+            {% for routetype in routetypes %}
+            <div class="row">
+                <div class="col-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                        <label class="form-check-label myfilterlabel" for="flexCheckChecked">
+                            {{routetype.route}}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-2 myfilterlabel">
+                    ({{routetype.count}})
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-3 col-xl-3 d-none d-lg-block container-fluid" style=" padding-left: 65px;">
+</div>
+        <!-- FILTER SIDEBAR END -->
+
+
+
+        <!-- ROUTES LIST RESULTS START -->
+
+
+        <div class="col-md-12  col-lg-9 col-xl-9">
+            <div class="container-fluid routess" style="padding-left:20px; ">
+
+                {% for route in routes %}
+                    {% if route.nbuses > 1 %}
+                <!-- connect route start -->
+
+                <div class="row myroutetagtext category doublerow {{route.b1categorycode}} {{route.b2categorycode}}">
+                    {{route.routetags}}
+                </div>
+                <div class="row doublerow category {{route.b1categorycode}} {{route.b2categorycode}}">
+                    <div class="col-12 container myroutecontainer">
+                        <div class="row">
+                            <div class="col-12 d-flex bd-highlight container">
+                                <div class="p-2 bd-highlight"
+                                    style="padding-bottom:0px !important; position: relative; min-width:42px; padding-top: 5px !important;">
+                                    <div class="mylinestart"></div>
+                                    <div class="myoriginbox d-flex align-items-center justify-content-center">
+                                        <span class="material-icons"
+                                            style="font-size:20!important; color: #808080;">&#xe55c;</span>
+                                    </div>
+
+                                </div>
+                                <div class="p-2 flex-grow-1 bd-highlight d-flex align-items-center myplaceinroute">
+                                    {{route.b1getint}} <span class="material-icons"
+                                    style="font-size:20!important; color:#777777">&#xe5df;</span> <span style = "color:#777777;">{{route.b1getinp}}</span>
+                                </div>
+                                
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 myroutesecondrowcol container-fluid">
+                                <div class="row">
+                                    <div class="col-3 d-flex">
+                                        <div class="mybusnamebox flex-shrink">
+
+                                            <span class="material-icons align-middle"
+                                                style="font-size:24!important; color: #fff; display:inline-block;">&#xe530;</span>
+                                            <span class="mybusnameinroute align-middle"
+                                                style="display:inline-block;">{{route.b1name}}</span>
+
+                                            <marquee class="myorigdestinbusname align-middle" scrollamount="4"
+                                                style="display: block;">
+                                                <span style="display: inline-block;">{{route.b1orig}}</span>
+                                                <span class="material-icons align-middle"
+                                                    style="font-size:17!important; color: #fff; display:inline-block;">&#xe5cc;</span>
+                                                <span style="display: inline-block;">{{route.b1dest}}</span>
+                                            </marquee>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center mybustypetext">
+                                        {{route.b1category}}
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center">
+                                        <div>
+                                            <span style="display:block;" class="mypricetext">{{route.b1fare}}</span>
+                                            <span style="display:block;" class="mypricetagline d-none d-xl-block">Incl of all taxes</span>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-5 d-flex align-items-center">
+                                        <div>
+                                            <span style="display:block;" class="mybusdetailshead">Bus details</span>
+                                            <span style="display:inline-block;">
+                                                {% for tag in route.b1tags %}
+                                                <div class="busdetailstag">
+                                                    <span class="material-icons align-middle"
+                                                        style="font-size:15!important; color: #1F6CC8; ">{{"&#xe8b5;"}}</span>
+                                                    <span class="align-middle">
+                                                        {{tag.tagtext}}
+                                                    </span>
+                                                </div>
+                                                {% endfor %}
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 d-flex bd-highlight container">
+                                <div class="p-2 bd-highlight"
+                                    style="padding-bottom:0px !important; position: relative; min-width:42px; padding-top: 5px !important;">
+                                    <div class="mylineend"></div>
+                                    <div class="myoriginbox d-flex align-items-center justify-content-center">
+                                        <span class="material-icons"
+                                            style="font-size:20!important; color: #808080;">&#xe157;</span>
+                                    </div>
+
+                                </div>
+                                <div class="p-2 flex-grow-1 bd-highlight d-flex align-items-center myplaceinroute">
+                                    {{route.b1getoutt}} <span class="material-icons"
+                                    style="font-size:20!important; color:#777777;">&#xe5df;</span> <span style = "color:#777777;">{{route.b1getoutp}}</span>
+                                </div>
+                                <!-- <div class="p-2 bd-highlight d-flex align-items-center mysubtimeinroute">{{route.b1getoutt}}</div> -->
+
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 mywaitingarea">
+                                <div class=" p-0">
+                                    <div class="mywaitingareaback d-flex justify-content-evenly align-items-stretch">
+                                        <div class="d-flex align-items-center">
+
+                                            <span class="material-icons align-middle"
+                                                style="font-size:20!important; color: #737373;">&#xe8b5;</span>
+                                            <span class="mywaittext">
+                                                Wait {{route.b12waitt}}
+                                            </span>
+
+                                        </div>
+                                        <div class="linebeforeor">
+
+                                        </div>
+                                        <div class="d-flex align-items-center">
+
+                                            <span class="mywaittext">
+                                                OR
+                                            </span>
+
+                                        </div>
+
+                                        <img src="{% static route.b12ad %}" height="60px"
+                                            style="border-radius: 5px;">
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 d-flex bd-highlight container">
+                                <div class="p-2 bd-highlight"
+                                    style="padding-bottom:0px !important; position: relative; min-width:42px; padding-top: 5px !important;">
+                                    <div class="mylinestart"></div>
+                                    <div class="myoriginbox d-flex align-items-center justify-content-center">
+                                        <span class="material-icons"
+                                            style="font-size:20!important; color: #808080;">&#xe157;</span>
+                                    </div>
+
+                                </div>
+                                <div class="p-2 flex-grow-1 bd-highlight d-flex align-items-center myplaceinroute">
+                                    {{route.b2getint}} <span class="material-icons"
+                                    style="font-size:20!important; color:#777777;">&#xe5df;</span> <span style = "color:#777777;">{{route.b2getinp}}</span>
+                                </div>
+                                <!-- <div class="p-2 bd-highlight d-flex align-items-center mymaintimeinroute">{{route.b2getint}}</div> -->
+
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 myroutesecondrowcol container-fluid">
+                                <div class="row">
+                                    <div class="col-3 d-flex">
+                                        <div class="mybusnamebox flex-shrink">
+
+                                            <span class="material-icons align-middle"
+                                                style="font-size:24!important; color: #fff; display:inline-block;">&#xe530;</span>
+                                            <span class="mybusnameinroute align-middle"
+                                                style="display:inline-block;">{{route.b2name}}</span>
+
+                                            <marquee class="myorigdestinbusname align-middle" scrollamount="4"
+                                                style="display: block;">
+                                                <span style="display: inline-block;">{{route.b2orig}}</span>
+                                                <span class="material-icons align-middle"
+                                                    style="font-size:17!important; color: #fff; display:inline-block;">&#xe5cc;</span>
+                                                <span style="display: inline-block;">{{route.b2dest}}</span>
+                                            </marquee>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center mybustypetext">
+                                        {{route.b2category}}
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center">
+                                        <div>
+                                            <span style="display:block;" class="mypricetext">{{route.b2fare}}</span>
+                                            <span style="display:block;" class="mypricetagline d-none d-xl-block">Incl of all taxes</span>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-5 d-flex align-items-center">
+                                        <div>
+                                            <span style="display:block;" class="mybusdetailshead">Bus details</span>
+                                            <span style="display:inline-block;">
+                                                {% for tag in route.b2tags%}
+                                                <div class="busdetailstag">
+                                                    <span class="material-icons align-middle"
+                                                        style="font-size:15!important; color: #1F6CC8; ">&#xe8b5;</span>
+                                                    <span class="align-middle">
+                                                        {{ tag.tagtext }}
+                                                    </span>
+                                                </div>
+                                                {% endfor %}
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 d-flex bd-highlight container">
+                                <div class="p-2 bd-highlight"
+                                    style="padding-bottom:0px !important; position: relative; min-width:42px; padding-top: 5px !important;">
+                                    <div class="mylineend"></div>
+                                    <div class="myoriginbox d-flex align-items-center justify-content-center">
+                                        <span class="material-icons"
+                                            style="font-size:20!important; color: #808080;">&#xe55e;</span>
+                                    </div>
+
+                                </div>
+                                <div class="p-2 flex-grow-1 bd-highlight d-flex align-items-center myplaceinroute">
+                                    {{route.b2getoutt}} <span class="material-icons"
+                                    style="font-size:20!important; color:#777">&#xe5df;</span> <span style = "color:#777777;">{{route.b2getoutp}}</span>
+                                </div>
+                                
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-between align-items-end">
+                                <span class="reachbytime">
+                                    Reach destination by
+                                    <span style="color:#29AA15; font-size: 18;">{{route.reachby}}</span>
+                                </span>
+                                <div>
+                                    <div class="viewroutebox align-items-center" style="display:inline-block;">
+                                        <span class="material-icons align-middle"
+                                            style="font-size:20!important; color: #658064;">&#xf184;</span>
+                                        <span class="align-middle">
+                                            VIEW ROUTE
+                                        </span>
+
+                                    </div>
+                                    <div class="bookticketsbox align-items-center" style="display: inline-block;">
+                                        <span class="material-icons align-middle"
+                                            style="font-size:20!important; color: #fff;">&#xe876;</span>
+                                        <span class="align-middle">
+                                            BOOK TICKETS
+                                        </span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- connect ROUTE END -->
+                {% else %}
+                <!-- DIRECT START -->
+                <div class="row myroutetagtext doublerow {{route.b1categorycode}} ">
+                    {{route.routetags}}
+                </div>
+                <div class="row doublerow {{route.b1categorycode}} ">
+                    <div class="col-12 container myroutecontainer">
+                        <div class="row">
+                            <div class="col-12 d-flex bd-highlight container">
+                                <div class="p-2 bd-highlight"
+                                    style="padding-bottom:0px !important; position: relative; min-width:42px; padding-top: 5px !important;">
+                                    <div class="mylinestart"></div>
+                                    <div class="myoriginbox d-flex align-items-center justify-content-center">
+                                        <span class="material-icons"
+                                            style="font-size:20!important; color: #808080;">&#xe55c;</span>
+                                    </div>
+
+                                </div>
+                                <div class="p-2 flex-grow-1 bd-highlight d-flex align-items-center myplaceinroute">
+                                    {{route.b1getint}} <span class="material-icons"
+                                    style="font-size:20!important; color:#777777;">&#xe5df;</span> <span style = "color:#777777;">{{route.b1getinp}}</span>
+                                </div>
+                                
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 myroutesecondrowcol container-fluid">
+                                <div class="row">
+                                    <div class="col-3 d-flex">
+                                        <div class="mybusnamebox flex-shrink">
+
+                                            <span class="material-icons align-middle"
+                                                style="font-size:24!important; color: #fff; display:inline-block;">&#xe530;</span>
+                                            <span class="mybusnameinroute align-middle"
+                                                style="display:inline-block;">{{route.b1name}}</span>
+
+                                            <marquee class="myorigdestinbusname align-middle" scrollamount="4"
+                                                style="display: block;">
+                                                <span style="display: inline-block;">{{route.b1orig}}</span>
+                                                <span class="material-icons align-middle"
+                                                    style="font-size:17!important; color: #fff; display:inline-block;">&#xe5cc;</span>
+                                                <span style="display: inline-block;">{{route.b1dest}}</span>
+                                            </marquee>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center mybustypetext">
+                                        {{route.b1category}}
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center">
+                                        <div>
+                                            <span style="display:block;" class="mypricetext">{{route.b1fare}}</span>
+                                            <span style="display:block;" class="mypricetagline d-none d-xl-block">Incl of all taxes</span>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-5 d-flex align-items-center">
+                                        <div>
+                                            <span style="display:block;" class="mybusdetailshead">Bus details</span>
+                                            <span style="display:inline-block;">
+                                                {% for tag in route.b1tags %}
+                                                <div class="busdetailstag">
+                                                    <span class="material-icons align-middle"
+                                                        style="font-size:15!important; color: #1F6CC8; ">{{"&#xe8b5;"}}</span>
+                                                    <span class="align-middle">
+                                                        {{tag.tagtext}}
+                                                    </span>
+                                                </div>
+                                                {% endfor %}
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        <div class="row">
+                            <div class="col-12 d-flex bd-highlight container">
+                                <div class="p-2 bd-highlight"
+                                    style="padding-bottom:0px !important; position: relative; min-width:42px; padding-top: 5px !important;">
+                                    <div class="mylineend"></div>
+                                    <div class="myoriginbox d-flex align-items-center justify-content-center">
+                                        <span class="material-icons"
+                                            style="font-size:20!important; color: #808080;">&#xe55e;</span>
+                                    </div>
+
+                                </div>
+                                <div class="p-2 flex-grow-1 bd-highlight d-flex align-items-center myplaceinroute">
+                                    {{route.b1getoutt}} <span class="material-icons"
+                                    style="font-size:20!important; color:#777777;">&#xe5df;</span> <span style = "color:#777777;">{{route.b1getoutp}}</span>
+                                </div>
+                               
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-between align-items-end">
+                                <span class="reachbytime">
+                                    Reach destination by
+                                    <span style="color:#29AA15; font-size: 18;">{{route.reachby}}</span>
+                                </span>
+                                <div>
+                                    <div class="viewroutebox align-items-center" style="display:inline-block;">
+                                        <span class="material-icons align-middle"
+                                            style="font-size:20!important; color: #658064;">&#xf184;</span>
+                                        <span class="align-middle">
+                                            VIEW ROUTE
+                                        </span>
+
+                                    </div>
+                                    <div class="bookticketsbox align-items-center" style="display: inline-block;">
+                                        <span class="material-icons align-middle"
+                                            style="font-size:20!important; color: #fff;">&#xe876;</span>
+                                        <span class="align-middle">
+                                            BOOK TICKETS
+                                        </span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- DIRECT END -->
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-1 d-none "></div>
+    </div>
+</div>
+{% endblock maincontent%}
+
+
+{% block script %}
+
+
+<script src="{% static 'user/resscript.js' %}"></script>
+
+{% endblock script %}
