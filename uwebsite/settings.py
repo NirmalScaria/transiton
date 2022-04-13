@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-h3z(1$p4ar!4vpha1u((c9sui3n)w8s^=ugr25$jzaf7d2-$)7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG') == 'on'
 
 ALLOWED_HOSTS = ["transiton.herokuapp.com", "transiton.scaria.dev"]
 
