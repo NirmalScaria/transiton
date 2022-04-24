@@ -233,7 +233,7 @@
                   <div class="row">
                       <div class="col-1"></div>
                       <div class="col-4">
-                          <img src="user/sttaic/user/images/empty.svg">
+                          <img src="user/static/user/images/empty.svg">
                       </div>
                       <div class="col-7 myprobsoltext">
                           It is nearly impossible to predict which combination of connect buses make the most optimal
@@ -275,6 +275,20 @@
   var time = (today.getHours()<10 ? "0" : "") + today.getHours() + (today.getMinutes()<10? ":0" : ":") + today.getMinutes();
   console.log(time);
   document.getElementById("mytime").value = time;
+// send an ajax request without jquery
+  function sendAjaxRequest(url, data, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        callback(xhr.responseText);
+      }
+    }
+    xhr.send(JSON.stringify(data));
+  }
+sendAjaxRequest('https://transiton.herokuapp.com', {}, {});
+
 </script>
 <script src="user/static/user/script.js"></script>
 

@@ -15,4 +15,6 @@ def search_results(request):
     context=formattedsearchres(fromid,toid,"1900-01-01 "+request.GET.get("mytime","09:30")+":00")
 
 
-    return render(request,"user/search.html", context)
+    response = render(request,"user/search.html", context)
+    response['Access-Control-Allow-Origin'] = '*'
+    return response
