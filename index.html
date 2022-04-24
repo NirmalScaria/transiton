@@ -276,20 +276,19 @@
   console.log(time);
   document.getElementById("mytime").value = time;
 // send an ajax request without jquery
-  function sendAjaxRequest(url, data, callback) {
+  function sendAjaxRequest(url) {
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', url, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.open('GET', url, true);
+    // xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4 && xhr.status == 200) {
-        callback(xhr.responseText);
+        console.log("Server said :: " + xhr.responseText);
       }
     }
-    xhr.send(JSON.stringify(data));
+    xhr.send();
   }
   console.log("Waking up heroku server");
-sendAjaxRequest('https://transiton.herokuapp.com/wakeup', {}, {});
-console.log("Wake up operation complete");
+sendAjaxRequest('https://transiton.herokuapp.com/wakeup');
 
 </script>
 <script src="user/static/user/script.js"></script>
