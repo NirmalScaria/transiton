@@ -1,5 +1,281 @@
 <html>
-  <h1>
-    Transiton
-  </h1>
+
+<head>
+    <title>Transiton</title>
+
+    <link rel="stylesheet" type="text/css" href="user/static/user/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="user/static/user/style.css">
+    <link rel="icon" href="user/static/user/images/favico.png" type="image/gif" sizes="16x16">
+
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet"> -->
+</head>
+<style>
+    body {
+        overflow-y: scroll;
+    }
+
+    body::-webkit-scrollbar {
+        display: none;
+    }
+
+    body {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
+
+<body style="background-color:#F1F6F9;">
+    <nav class="navbar navbar-expand-md navbar-expand-lg mynav">
+        <div class="container-fluid">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <a class="navbar-brand mynavbrand" href="{% url 'user-home' %}">TRANSITON</a>
+            </div>
+
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <div class="mynavholder0">
+                            <a class="nav-link mynavitem" href="#">Help</a>
+                        </div>
+
+                    </li>
+                    <li class="nav-item">
+                        <div class="mynavholder0">
+                            <a class="nav-link mynavitem text-nowrap" href="#">Get in touch</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="mynavholder0">
+                            <a class="nav-link mynavitem text-nowrap" href="#">View Booking
+                                <span class="material-icons" style="font-size:18!important;">&#xe5cf;</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="mynavholder0">
+                            <a class="nav-link mynavitem" href="#">
+                                <span class="material-icons" style="font-size:27!important;">&#xe7fd;</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mymainbody jumbotron d-flex ">
+      <div class="mymainwatermark" style="z-index:0;"></div>
+      <div class="container" style="position:relative; top:120;">
+          <div class="row">
+              <div class="col">
+                  <div class="d-flex justify-content-center text-center mytagtext">Find the best bus routes,<br />
+                      with no hassle</div>
+  
+              </div>
+          </div>
+          <br />
+          <form method = "get" action = "search" autocomplete="off" style="margin: 0px;">
+          <div class="row" style="font-family: 'Roboto', sans-serif;
+          font-weight : 300 !important; ">
+              <div class="col-lg-1 .d-none .d-lg-block .d-xl-none"></div>
+  
+              <div class="mysearchbox col-2 " style="padding:0px; margin:0px;">
+                  <div class="d-flex bd-highlight" style="background-color:white; margin:0px; padding:0px;">
+                      <div style="background-color: white; margin:0px; padding:9px; padding-right:0px;">
+                          <span class="material-icons" style="font-size:17!important; color:#707070;">&#xe55f;</span>
+                      </div>
+                      <div class="flex-fill flex-grow-1" style="background-color: white; padding:0px;">
+                          <input type="text" name="from" id="from" onkeyup="fromchanged();" onfocusin="fromchanged();"
+                              onfocusout=" fromdefocused();" placeholder="FROM"
+                              style="line-height: 200%; width:100%; height:100%; border:0px; text-transform: uppercase; font-weight:300;">
+                      </div>
+                  </div>
+              </div>
+  
+              <div class="mysearchbox col-2 "
+                  style=" padding:0px; margin:0px; border-right-style:solid; border-right-width:1px; border-right-color:#909090;">
+                  <div class="d-flex bd-highlight" style="background-color:white; margin:0px; padding:0px;">
+                      <div
+                          style="position:relative; background-color: white; margin:0px; padding:0px; padding-top:6px; padding-bottom:6px; width:25px;">
+                          <div
+                              style="z-index:0;  position:absolute; left:50%; top:0px; height:100%; border-left-width: 1px; border-left-color: #909090; border-left-style: solid;">
+                          </div>
+  
+                          <div
+                              style="position: relative; z-index:100; background-color: white; padding:3px; padding-top:3px; padding-bottom:3px; border-radius: 100px; border-width:1px; border-style: solid; border-color:#707070;">
+                              <span class="material-icons"
+                                  style="font-size:17!important; color:#707070;">&#xe8d4;</span></div>
+  
+                      </div>
+                      <div class="flex-fill flex-grow-1" style="background-color: white; padding:0px;">
+                          <input type="text" name="to" id="to" onkeyup="tochanged();" onfocusin="tochanged();"
+                              onfocusout="todefocused();" placeholder="TO"
+                              style="line-height:200%; width:100%; height:100%; border:0px; text-transform: uppercase; font-weight:300;">
+                      </div>
+                  </div>
+              </div>
+  
+              <div class="mysearchbox col-4 col-md-5 col-lg-4 d-flex justify-content-evenly"
+                  style="padding:0px; margin:0px; white-space:nowrap; ">
+                  <div class="p2-bd-highlight">
+                      <span class="material-icons d-none d-sm-none  d-lg-inline d-md-none"
+                          style="font-size:17!important; color:#707070; padding-left:10px;">&#xe576;</span>
+  
+  
+                      <select name="dora" id="doraa"
+                          style="  -webkit-appearance:none;
+                               height:100%; padding-right:0px;  border:0px; color: #707070; cursor: pointer; background-color: white;  font-weight:300;">
+                          <option value="depart">DEPART AT</option>
+                          <option value="reach">REACH AT</option>
+                      </select>
+                  </div>
+  
+  
+                  <div class="p2-bd-highlight">
+  
+                      <input type="time" id="mytime" name="mytime"
+                          style="height:100%;  color:#707070; cursor:pointer; border:0px; background-color: white; -webkit-appearance: none; margin-right:-20; font-weight:300;"
+                          value="18:00"></input>
+  
+                  </div>
+                  <div class="p2-bd-highlight">
+  
+                      <div
+                          style="z-index:10;  position:relative; left:0; top:0px; height:100%; border-left-width: 1px; border-left-color: #909090; border-left-style: solid;">
+                      </div>
+                  </div>
+  
+                  <div class="p2-bd-highlight">
+                      <input type="date" id="mydate" name="mydate"
+                          style="height:100%;  color:#707070; cursor:text; border:0px; background-color: #ffffff ; -webkit-appearance: none; margin-right:-20; font-weight:300;"
+                          value="1999-01-11"></input>
+  
+  
+                  </div>
+  
+  
+              </div>
+  
+              <div class="mysearchbox col-2 col-md-3 col-lg-2 container"
+                  style="padding:0px; margin:0px; height:100%; white-space:nowrap;">
+                  <div class="row" style="background-color:white; margin:0px; padding:0px; height:100%;">
+  
+                      <div class="col-12 text-center" style="padding-right:0px;">
+  
+                          <button
+                              style="background-color : #709371; padding-top:6px; padding-bottom:7px; padding-left:0px; padding-right:0px; width:100%; border:0px;">
+                              <span class="material-icons"
+                                  style="font-size:17!important; color:#FFFFFF;  ">&#xe8b6;</span>
+                              <span style="height:100%; width:100%; color:white; cursor:pointer;  font-weight:300;">SEARCH
+                                  BUSES</span>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+  
+          </div>
+          <input type = "hidden" name = "fromid" id = "fromid" val = "0">
+          <input type = "hidden" name = "toid" id = "toid" val = "0">
+      </form>
+          <div style="height:7px;"></div>
+          <div class="row">
+              <div class="col-lg-1 .d-none .d-lg-block .d-xl-none"></div>
+  
+              <div class=" col-2 " style="padding:0px; margin:0px;" id="myfromsuggestions">
+  
+  
+  
+  
+              </div>
+  
+              <div class=" col-2 " style="padding:0px; margin:0px;" id="mytosuggestions">
+  
+  
+  
+  
+              </div>
+          </div>
+          <br /><br />
+      </div>
+  </div>
+  
+  
+  <div style=" position: absolute; top:554; width:100%;">
+      <h2 style="    color:#444444;
+      font-family: 'Roboto', sans-serif;
+      font-weight : 700 !important;" class="text-center center">
+  
+          Bus connections are often complicated.<br /> We got you covered.
+      </h2>
+  
+      <div class="container">
+          <br />
+          <div class="row">
+              <div class="col-1">
+  
+              </div>
+              <div class="col-4 myprobsol text-center">
+                  THE PROBLEM
+              </div>
+              <div class="col-2">
+  
+              </div>
+              <div class="col-4 myprobsol text-center">
+                  THE SOLUTION
+              </div>
+          </div>
+          <br />
+  
+  
+          <div class="row">
+  
+              <div class="col-5 container">
+                  <div class="row">
+                      <div class="col-1"></div>
+                      <div class="col-4">
+                          <img src="{% static 'user/images/empty.svg' %}">
+                      </div>
+                      <div class="col-7 myprobsoltext">
+                          It is nearly impossible to predict which combination of connect buses make the most optimal
+                          route for your journey.
+                      </div>
+                  </div>
+              </div>
+              <div class="col-2">
+  
+              </div>
+              <div class="col-5 container">
+                  <div class="row">
+  
+                      <div class="col-7 myprobsoltext" style="text-align:right;">
+                          We check all the possible options for you, do all the calculations, and present you with the
+                          best choice for you.
+                      </div>
+                      <div class="col-4">
+                          <img src="{% static 'user/images/idea.svg' %}" style="width:80%;">
+                      </div>
+                      <div class="col-1"></div>
+                  </div>
+              </div>
+          </div>
+  
+          <br />
+          <br />
+      </div>
+  
+  </div> 
+    
+</body>
+
+<script>
+  var today = new Date();
+  var date = today.getFullYear() + (today.getMonth() + 1 < 10 ? '-0' : '-') + (today.getMonth() + 1) + '-' + today
+      .getDate();
+  document.getElementById("mydate").value = date;
+  var time = (today.getHours()<10 ? "0" : "") + today.getHours() + (today.getMinutes()<10? ":0" : ":") + today.getMinutes();
+  console.log(time);
+  document.getElementById("mytime").value = time;
+</script>
+<script src="user/static/user/script.js"></script>
+
 </html>
