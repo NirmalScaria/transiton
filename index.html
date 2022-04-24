@@ -287,7 +287,9 @@
     }
     xhr.send(JSON.stringify(data));
   }
-sendAjaxRequest('https://transiton.herokuapp.com', {}, {});
+  console.log("Waking up heroku server");
+sendAjaxRequest('https://transiton.herokuapp.com/wakeup', {}, {});
+console.log("Wake up operation complete");
 
 </script>
 <script src="user/static/user/script.js"></script>
