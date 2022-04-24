@@ -18,3 +18,8 @@ def search_results(request):
     response = render(request,"user/search.html", context)
     response['Access-Control-Allow-Origin'] = '*'
     return response
+
+def wake_up(request):
+    response =  render(request,'user/wake_up.html')
+    response['Access-Control-Allow-Origin'] = '*'
+    return response
